@@ -1,0 +1,10 @@
+li{
+    list-style-type: none;
+}
+.footer.content > img,
+.footer.content > p {
+    display: inline-block;
+}
+/* .done{
+
+} */

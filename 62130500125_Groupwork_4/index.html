@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photo Gallery</title>
+    <!-- https://google.github.io/material-design-icons/#icon-font-for-the-web -->
+    <!-- Using via Google Web Fonts -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- https://tailwindcss.com/docs/installation -->
+    <!-- Using Tailwind via CDN -->
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- https://v3.vuejs.org/guide/installation.html#release-notes -->
+    <!-- Vue CDN -->
+    <script src="https://kit.fontawesome.com/ffb5cefdd9.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app" class="">
+      <div class="text-3xl font-bold ml-72">
+        Photo Gallery({{ countUndone }})
+      </div>
+      <div class="inline-flex">
+        <div class="cursor-pointer ml-72 pl-72" :class="{'hidden':form.search}" >
+          <i class="fas fa-search fa-2x" @click="search"></i>
+        </div>
+        <div :class="{'hidden' :!form.search}">
+      <input v-model="form.text" class="border-2 w-72 ml-2" placeholder="Please enter text for searching photos"/>
+      <button class="bg-blue-400 px-2 py-2 font-medium text-white rounded-lg" @click="search">Cancel</button>
+    </div>
+    
+      </div>
+      <div class="bg-black h-72 " style="width: 800px;" :class="{'hidden':!toggle}">
+      <span class="bg-white float-right mt-5 mr-5 w-5 h-6 rounded-lg cursor-pointer">
+        <i class="fas fa-times ml-1 my-1" @click="cancel"></i>
+      </span>
+      <img v-bind:src="image" alt="" class="pl-24 h-72">
+    </div>
+      <li v-if="searching.length !== 0 " v-for="(obj,index) in searching" class="footer content">
+        <img
+          v-on:click="toggleDone(index)+updateImage(obj.img)"
+          v-bind:src="obj.img"
+          alt=""
+          class="w-72 h-44 cursor-pointer mr-4 mt-4 rounded-md border-4 border-black"
+        />
+        <p class="text-xl font-semibold">{{obj.title}}</p>
+        <img v-if="obj.done" class="w-12 ml-4" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/1200px-Heart_coraz%C3%B3n.svg.png " alt=""></>
+      </li>
+      <div v-else class="mt-10 bg-white shadow-lg rounded w-full mx-auto px-auto py-5 flex justify-center">
+        <h2 class="mb-2 text-2xl font-bold text-gray-800">No Photos.</h2>
+    </div>
+      <div>Nattawat Wangsupadilok</div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
